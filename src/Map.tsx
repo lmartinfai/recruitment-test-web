@@ -1,26 +1,26 @@
-import "mapbox-gl/dist/mapbox-gl.css"
+import React, { PropsWithChildren } from "react";
+import { Map as _Map } from "react-map-gl/mapbox";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-import { Map as _ReactMapboxGl } from "react-mapbox-gl"
+interface MapProps {}
 
-const GERMANY_BOUNDS: [[number, number], [number, number]] = [
-  [3, 40],
-  [16, 56],
-]
+const Map: React.FC<PropsWithChildren<MapProps>> = (props) => {
+  const { children } = props;
 
-const ReactMapboxGl = _ReactMapboxGl({} as any)
+  return (
+    <_Map
+      mapboxAccessToken="pk.eyJ1IjoiZWNsZXZlciIsImEiOiJja3IzM3B3b24yMHNsMnBueGNya3I4eXExIn0.qNBd6dRRZLTTxKSJ0PUazg"
+      initialViewState={{
+        longitude: 10,
+        latitude: 50,
+        zoom: 5,
+      }}
+      style={{ width: "100%", height: "100%" }}
+      mapStyle="mapbox://styles/mapbox/streets-v9"
+    >
+      {children}
+    </_Map>
+  );
+};
 
-const Map = ({
-  children,
-}: {
-  children?: JSX.Element | JSX.Element[] | Array<JSX.Element | undefined>
-}) => (
-  <ReactMapboxGl
-    style="mapbox://styles/mapbox/streets-v11"
-    fitBounds={GERMANY_BOUNDS}
-    containerStyle={{ width: "100%", height: "100%" }}
-  >
-    {children}
-  </ReactMapboxGl>
-)
-
-export default Map
+export default Map;
